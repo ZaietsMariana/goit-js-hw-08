@@ -64,20 +64,42 @@ const images = [
   },
 ];
 
-const container = document.querySelector("gallery");
+const container = document.querySelector(".gallery");
+
 container.insertAdjacentHTML("beforeend", createImages(images));
 
 function createImages(arr) {
-    return arr.map(image => 
+    return arr.map(({ preview, original, description }) => 
         `<li class= "gallery-item">
-            <a class="gallery-link" href="${image.preview}" download>
+            <a class="gallery-link" href="${original}" >
                 <img
                 class="gallery-image"
-                src="${image.original}"
-                    data-source="${image.preview}"
-                alt="${image.discription}"
+                src="${preview}"
+                    data-source="${original}"
+                alt="${description}"
                 />
             </a>     
 </li>
 `).join("");
 }
+
+container.addEventListener("click", handleClick);
+
+function handleClick(event) {
+  if (event.tatget === event.currentTarget) {
+    return;
+  }
+
+  const instance = basicLightbox.create(`
+     <div class="modal">
+     <img src="${original}">
+     </div>
+   `)
+
+  instance.show()
+}
+
+
+
+
+
