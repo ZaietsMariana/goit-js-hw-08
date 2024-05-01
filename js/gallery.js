@@ -70,7 +70,7 @@ container.insertAdjacentHTML("beforeend", createImages(images));
 
 function createImages(arr) {
     return arr.map(({ preview, original, description }) => 
-        `<li class= "gallery-item">
+        `<li class= "item gallery-item">
             <a class="gallery-link" href="${original}" >
                 <img
                 class="gallery-image"
@@ -83,22 +83,33 @@ function createImages(arr) {
 `).join("");
 }
 
+console.log(createImages(images));
+
 container.addEventListener("click", handleClick);
 
 function handleClick(event) {
-  if (event.tatget === event.currentTarget) {
+  event.preventDefault();
+  if (event.target === event.currentTarget) {
     return;
   }
 
-  const instance = basicLightbox.create(`
-     <div class="modal">
-     <img src="${original}">
-     </div>
-   `)
+  document.querySelectorAll(".gallery").forEach(item => {
+    item.addEventListener('click', function (event) {
+       if (event.target === event.currentTarget) {
+    return;
+  }
+        
+      const largeImageUrl = event.target.dataset.source;
+      console.log(largeImageUrl);
 
-  instance.show()
+     const instance = basicLightbox.create(`
+      <img src="${largeImageUrl}" width="1112" height="640px">
+    `);
+      instance.show();
+    }
+    )
+  });
 }
-
 
 
 
