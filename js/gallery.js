@@ -100,10 +100,12 @@ function handleClick(event) {
   }
         
       const largeImageUrl = event.target.dataset.source;
-      console.log(largeImageUrl);
+      
+
+
 
      const instance = basicLightbox.create(`
-      <img src="${largeImageUrl}" width="1112" height="640px">
+      <img src="${largeImageUrl}">
     `);
       instance.show();
     }
