@@ -76,14 +76,14 @@ function createImages(arr) {
                 class="gallery-image"
                 src="${preview}"
                     data-source="${original}"
-                alt="${description}"
+                alt="${description}" 
                 />
             </a>     
 </li>
 `).join("");
 }
 
-console.log(createImages(images));
+// console.log(createImages(images));
 
 container.addEventListener("click", handleClick);
 
@@ -94,22 +94,17 @@ function handleClick(event) {
   }
 
   document.querySelectorAll(".gallery").forEach(item => {
-    item.addEventListener('click', function (event) {
-       if (event.target === event.currentTarget) {
+    if (event.target === event.currentTarget) {
     return;
   }
         
-      const largeImageUrl = event.target.dataset.source;
+    const largeImageUrl = event.target.dataset.source;
       
-
-
-
-     const instance = basicLightbox.create(`
+   const instance = basicLightbox.create(`
       <img src="${largeImageUrl}">
     `);
       instance.show();
-    }
-    )
+    
   });
 }
 
